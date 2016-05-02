@@ -1,5 +1,7 @@
-FROM alpine:3.3
+FROM quay.io/wunder/wunder-alpine-base
 MAINTAINER ilari.makela@wunderkraut.com
+
+USER app
 
 # Update the package repository and install applications
 RUN apk --no-cache --update add mariadb && \
