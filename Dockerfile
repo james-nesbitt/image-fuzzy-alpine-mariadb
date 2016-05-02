@@ -1,15 +1,14 @@
 FROM quay.io/wunder/wunder-alpine-base
 MAINTAINER ilari.makela@wunderkraut.com
 
-USER app
-
 # Update the package repository and install applications
 RUN apk --no-cache --update add mariadb && \
     rm -rf /tmp/* && \
     rm -rf /var/cache/apk/* && \
     mysql_install_db
 
-VOLUME /var/lib/mysql
+USER app
+
 VOLUME /var/log/mysql
 
 # Expose port 3306
