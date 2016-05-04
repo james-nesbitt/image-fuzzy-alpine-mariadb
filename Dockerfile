@@ -7,8 +7,6 @@ RUN apk --no-cache --update add mariadb && \
     rm -rf /var/cache/apk/* && \
     mysql_install_db
 
-USER app
-
 VOLUME /var/log/mysql
 
 # Expose port 3306
