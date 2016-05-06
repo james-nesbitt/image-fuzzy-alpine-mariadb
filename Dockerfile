@@ -5,7 +5,8 @@ MAINTAINER ilari.makela@wunderkraut.com
 RUN apk --no-cache --update add mariadb && \
     rm -rf /tmp/* && \
     rm -rf /var/cache/apk/* && \
-    mysql_install_db
+    mysql_install_db && \
+    chown -R mysql:mysql /var/lib/mysql
 
 VOLUME /var/log/mysql
 
