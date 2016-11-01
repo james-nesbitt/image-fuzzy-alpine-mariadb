@@ -24,12 +24,7 @@ This image is based on https://github.com/wunderkraut/alpine-base
 
 ## Using this Image
 
-run this container as an independent service:
-
-```
-$/> docker run -d quay.io/wunder/alpine-mariadb
-```
-
+* this image does not produce a running db server (no db initialized)
 * link any containers that need a db to this one
 * this image is not necessarily usefull for run-time orchestration as
   it contains no initialized database.
