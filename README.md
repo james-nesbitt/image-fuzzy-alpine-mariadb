@@ -1,8 +1,8 @@
-# alpine-mariadb
+# image-fuzzy-alpine-mariadb
 
-A base docker image for providing a mariadb (mysql) service
+A base docker image for providing a Mariadb service with a default database.
 
-Maintained by: Aleksi Johansson <aleksi.johansson@wunder.io>
+Maintained by: James Nesbitt <james.nesbitt@wunder.io>
 
 ## Docker
 
@@ -10,11 +10,11 @@ Maintained by: Aleksi Johansson <aleksi.johansson@wunder.io>
 
 This image is available publicly at:
 
-- quay.io/wunder/alpine-mariadb : [![Docker Repository on Quay](https://quay.io/repository/wunder/alpine-mariadb/status "Docker Repository on Quay")](https://quay.io/repository/wunder/alpine-mariadb)
+- quay.io/wunder/alpine-mariadb : [![Docker Repository on Quay](https://quay.io/repository/wunder/fuzzy-alpine-mariadb/status "Docker Repository on Quay")](https://quay.io/repository/wunder/fuzzy-alpine-mariadb)
 
 ### Base
 
-This image is based on https://github.com/wunderkraut/alpine-base
+This image is based on https://github.com/wunderkraut/image-fuzzy-alpine-base
 
 ### Modifications
 
@@ -22,12 +22,36 @@ This image is based on https://github.com/wunderkraut/alpine-base
 
 1. Install standard maridb
 
+#### etc/mysql/my.cnf
+
+This image contains a highly tuned my.cnf:
+
+1. Error and output logging goes to the container output;
+2. Engine defaults to UTF-8 encoding and collation;
+3. Cache settings are made more lenient;
+4. Request timeout and size limits are increased;
+5. InnoDB is used as a default, and is heavily tuned;
+6. One or two custom changes relating to transaction locking are set.
+
+#### A default database is created
+
+- A general mysql installation is processed;
+- Some default insecure mysql access is removed;
+- The root password is set;
+- The database `mysql://app:app@127.0.0.1/app` is created.
+
+* Credentials used here are avaialble as build args for any custom application requirements.
+
 ## Using this Image
 
-* this image does not produce a running db server (no db initialized)
-* link any containers that need a db to this one
-* this image is not necessarily usefull for run-time orchestration as
-  it contains no initialized database.
+run this container as an independent service:
+
+```
+$/> docker run -d quay.io/wunder/image-fuzzy-alpine-mariadb
+```
+
+Then link the resulting container into any other containers that need a database.
+Access to the database service is defined in the Dockerfile, and can be read there.
 
 ## TODO
 
