@@ -24,7 +24,7 @@ ARG MYSQL_PASSWORD=app
 #
 # - technically mariadb-client is not needed after db is created.
 #
-RUN apk --no-cache --update add mariadb mariadb-client && \
+RUN apk --no-cache --update add mariadb && \
     rm -rf /tmp/* && \
     rm -rf /var/cache/apk/*
 
@@ -46,7 +46,8 @@ ADD etc/mysql/my.cnf /etc/mysql/my.cnf
 # - remove the mysql client now that we don't need it anymore
 # - clean up apk
 #
-RUN mysql_install_db && \
+RUN apk --no-cache --update add -t .build-deps mariadb-client && \
+    mysql_install_db && \
     chown -R mysql:mysql /var/lib/mysql && \
     (/usr/bin/mysqld_safe &) && sleep 3 && \
     mysql -u root -e "UPDATE mysql.user SET Password=PASSWORD('${MYSQL_ROOT_PASSWORD}') WHERE User='root'" && \
@@ -56,7 +57,10 @@ RUN mysql_install_db && \
     mysql -u root -e "GRANT ALL ON ${MYSQL_DATABASE}.* to ${MYSQL_USER}@'%' IDENTIFIED BY '${MYSQL_PASSWORD}'" && \
     mysql -u root -e "FLUSH PRIVILEGES" &&\
     killall mysqld && \
-    sleep 3 # waiting for mysql to die
+    sleep 3 # waiting for mysql to die && \
+    apk del .build-deps && \
+    rm -rf /tmp/* && \
+    rm -rf /var/cache/apk/*
 
 ####
 # Expose port 3306
