@@ -1,5 +1,7 @@
 # image-fuzzy-alpine-mariadb
 
+Fuzzy as in reference to the https://en.wikipedia.org/wiki/The_Mythical_Man-Month book where Fred describes the approach of "write one to throw away" as the best start.
+
 A base docker image for providing a Mariadb service with a default database.
 
 Maintained by: James Nesbitt <james.nesbitt@wunder.io>
