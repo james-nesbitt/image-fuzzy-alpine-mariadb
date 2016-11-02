@@ -12,7 +12,7 @@ Maintained by: James Nesbitt <james.nesbitt@wunder.io>
 
 This image is available publicly at:
 
-- quay.io/wunder/alpine-mariadb : [![Docker Repository on Quay](https://quay.io/repository/wunder/fuzzy-alpine-mariadb/status "Docker Repository on Quay")](https://quay.io/repository/wunder/fuzzy-alpine-mariadb)
+- quay.io/wunder/fuzzy-alpine-mariadb : [![Docker Repository on Quay](https://quay.io/repository/wunder/fuzzy-alpine-mariadb/status "Docker Repository on Quay")](https://quay.io/repository/wunder/fuzzy-alpine-mariadb)
 
 ### Base
 
